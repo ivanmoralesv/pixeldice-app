@@ -6,7 +6,7 @@ import { IconCheck, IconOrder, IconStart, IconTeams } from "../../shared/compone
 import { assignTeams, buildOrder, chooseWinner } from "./selectorEngine.js";
 import { playerColors, playerEmoji, selectorModes } from "./selectorModes.js";
 
-const MAX_STARTER_PLAYERS = 5;
+const MAX_TOUCH_PLAYERS = 5;
 const MAX_SELECTOR_PLAYERS = 30;
 const STARTER_COUNTDOWN_SECONDS = 3;
 const STARTER_COUNTDOWN_STEP_MS = 1000;
@@ -27,7 +27,7 @@ const dicePositions = [
   [188, 188],
 ];
 
-export default function PlayerSelector({ accent, activeTab, onTabChange }) {
+export default function PlayerSelector({ accent, activeTab, onTabChange, onAccentChange }) {
   const [playerCount, setPlayerCount] = useState(4);
   const [mode, setMode] = useState("starter");
   const [teamCount, setTeamCount] = useState(2);
@@ -35,9 +35,9 @@ export default function PlayerSelector({ accent, activeTab, onTabChange }) {
   const [claimed, setClaimed] = useState([]);
   const [result, setResult] = useState(null);
 
-  const maxPlayers = mode === "starter" ? MAX_STARTER_PLAYERS : MAX_SELECTOR_PLAYERS;
+  const maxPlayers = MAX_SELECTOR_PLAYERS;
   const maxTeams = Math.max(2, playerCount - 1);
-  const isDiceFaceMode = playerCount <= 5;
+  const isDiceFaceMode = playerCount <= MAX_TOUCH_PLAYERS;
   const ready = claimed.length >= playerCount;
 
   const cells = useMemo(() => {
@@ -62,10 +62,6 @@ export default function PlayerSelector({ accent, activeTab, onTabChange }) {
 
   function changeMode(nextMode) {
     setMode(nextMode);
-    if (nextMode === "starter") {
-      setPlayerCount((value) => Math.min(value, MAX_STARTER_PLAYERS));
-      setTeamCount((teams) => Math.min(Math.max(2, teams), MAX_STARTER_PLAYERS - 1));
-    }
     reset("setup");
   }
 
@@ -97,13 +93,13 @@ export default function PlayerSelector({ accent, activeTab, onTabChange }) {
   }, []);
 
   if (phase === "claim") {
-    if (mode === "starter") {
+    if (mode === "starter" && isDiceFaceMode) {
       return (
         <StarterTouchSelector
           accent={accent}
           activeTab={activeTab}
           onTabChange={onTabChange}
-          maxPlayers={MAX_STARTER_PLAYERS}
+          maxPlayers={MAX_TOUCH_PLAYERS}
           onBack={() => reset("setup")}
           onComplete={resolveStarterTouch}
         />
@@ -111,10 +107,10 @@ export default function PlayerSelector({ accent, activeTab, onTabChange }) {
     }
 
     return (
-      <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent}>
+      <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent} onAccentChange={onAccentChange}>
         <Eyebrow>{isDiceFaceMode ? "Selector · Modo dado" : "Selector · Parrilla"}</Eyebrow>
         <h1 className="pd-title pd-title--md">{isDiceFaceMode ? "Mantén pulsado tu cuadrado" : "Elige tu píxel"}</h1>
-        <p className="pd-sub">{modeCopy(mode, teamCount)}</p>
+        <p className="pd-sub">{modeCopy(mode, teamCount, isDiceFaceMode)}</p>
 
         <div className="pd-claim-stage">
           <PixelDust points={[[24, 30], [310, 60], [40, 360], [300, 380, 6], [180, 24]]} />
@@ -138,7 +134,7 @@ export default function PlayerSelector({ accent, activeTab, onTabChange }) {
               })}
             </div>
           ) : (
-            <div className="pd-grid-claim" style={{ gridTemplateColumns: "repeat(5, 1fr)" }}>
+            <div className="pd-grid-claim">
               {cells.map((cell) => {
                 const player = claimed.find((item) => item.cell === cell);
                 return (
@@ -146,7 +142,7 @@ export default function PlayerSelector({ accent, activeTab, onTabChange }) {
                     key={cell}
                     type="button"
                     className={`pd-pix${player ? " is-claimed" : ""}`}
-                    style={{ background: player?.color }}
+                    style={player ? { background: player.color } : undefined}
                     onClick={() => claimCell(cell)}
                     aria-label={player ? `${player.label} seleccionado` : "Reclamar pixel"}
                   >
@@ -176,6 +172,7 @@ export default function PlayerSelector({ accent, activeTab, onTabChange }) {
         accent={accent}
         activeTab={activeTab}
         onTabChange={onTabChange}
+        onAccentChange={onAccentChange}
         mode={mode}
         result={result}
         onReset={() => reset("setup")}
@@ -185,19 +182,17 @@ export default function PlayerSelector({ accent, activeTab, onTabChange }) {
   }
 
   return (
-    <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent}>
-        <h1 className="pd-title pd-title--lg">¿Quién empieza?</h1>
+    <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent} onAccentChange={onAccentChange}>
+      <h1 className="pd-title pd-title--lg">¿Quién empieza?</h1>
 
-      {mode !== "starter" && (
-        <section className="pd-section">
-          <div className="pd-label">Jugadores</div>
-          <div className="pd-bigcount">
-            <button type="button" className="pd-cbtn" disabled={playerCount <= 2} onClick={() => changePlayerCount(-1)}>–</button>
-            <span className="pd-num">{playerCount}</span>
-            <button type="button" className="pd-cbtn" disabled={playerCount >= maxPlayers} onClick={() => changePlayerCount(1)}>+</button>
-          </div>
-        </section>
-      )}
+      <section className="pd-section">
+        <div className="pd-label">Jugadores</div>
+        <div className="pd-bigcount">
+          <button type="button" className="pd-cbtn" disabled={playerCount <= 2} onClick={() => changePlayerCount(-1)}>–</button>
+          <span className="pd-num">{playerCount}</span>
+          <button type="button" className="pd-cbtn" disabled={playerCount >= maxPlayers} onClick={() => changePlayerCount(1)}>+</button>
+        </div>
+      </section>
 
       <section className="pd-section">
         <div className="pd-label">Modo</div>
@@ -400,13 +395,15 @@ function ProgressDots({ current, total }) {
   );
 }
 
-function SelectorResult({ accent, activeTab, onTabChange, mode, result, onReset, onRepeat }) {
+function SelectorResult({ accent, activeTab, onTabChange, onAccentChange, mode, result, onReset, onRepeat }) {
   if (mode === "starter") {
     return (
-      <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={result.winner?.color || accent} tone="winner">
-        <div className="pd-result">
-          <div className="pd-result__emoji">{result.winner?.label}</div>
-          <h1 className="pd-title pd-title--xl">Primer<br />jugador</h1>
+      <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={result.winner?.color || accent} tone="winner" flush showNav={false}>
+        <div className="pd-result pd-result--starter">
+          <div className="pd-result__winner-lockup">
+            <div className="pd-result__emoji pd-result__emoji--winner">{result.winner?.label}</div>
+            <h1 className="pd-title pd-title--xl">Primer jugador</h1>
+          </div>
           <button className="pd-cta pd-cta--on-accent" type="button" onClick={onRepeat}>Repetir</button>
         </div>
       </AppShell>
@@ -414,7 +411,7 @@ function SelectorResult({ accent, activeTab, onTabChange, mode, result, onReset,
   }
 
   return (
-    <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent}>
+    <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent} onAccentChange={onAccentChange}>
       <Eyebrow>{mode === "order" ? "Orden final" : "Equipos"}</Eyebrow>
       <h1 className="pd-title pd-title--md">{mode === "order" ? "Turno a turno" : "Mesa equilibrada"}</h1>
       <div className="pd-result-list">
@@ -437,10 +434,11 @@ function SelectorResult({ accent, activeTab, onTabChange, mode, result, onReset,
   );
 }
 
-function modeCopy(mode, teamCount) {
+function modeCopy(mode, teamCount, isDiceFaceMode) {
   if (mode === "order") return "Cada jugador reclama un píxel. Después revelamos el orden.";
   if (mode === "teams") return `Cada jugador reclama un píxel. Después repartimos ${teamCount} equipos equilibrados.`;
-  return "Cada jugador coloca un dedo. La cuenta atrás elige el primer turno.";
+  if (isDiceFaceMode) return "Cada jugador coloca un dedo. La cuenta atrás elige el primer turno.";
+  return "Cada jugador reclama un píxel. Después revelamos el primer jugador.";
 }
 
 function getNextOpenSlot(players, maxSlots) {

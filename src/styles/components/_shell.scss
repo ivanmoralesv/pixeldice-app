@@ -35,6 +35,122 @@
   overflow: hidden;
 }
 
+.pd-settings-menu {
+  position: absolute;
+  top: calc(16px + env(safe-area-inset-top, 0px));
+  right: 16px;
+  z-index: 50;
+}
+
+.pd-settings-trigger {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--pd-glass-hair);
+  border-radius: 999px;
+  background: var(--pd-glass);
+  color: var(--pd-fg);
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  box-shadow: 0 16px 34px -26px var(--pd-shadow);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+}
+
+.pd-settings-popover {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: min(318px, calc(100vw - 32px));
+  max-height: calc(100svh - 104px);
+  overflow-y: auto;
+  padding: 18px;
+  color: var(--pd-fg);
+  background: color-mix(in srgb, var(--pd-bg) 92%, transparent);
+  border: 1px solid var(--pd-glass-hair);
+  box-shadow: 0 28px 70px -34px var(--pd-shadow);
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+}
+
+.pd-settings-popover .pd-section {
+  margin-top: 18px;
+}
+
+.pd-seg {
+  display: flex;
+  border: 1px solid var(--pd-fg);
+  margin-top: 10px;
+}
+
+.pd-seg button {
+  flex: 1;
+  border: 0;
+  border-right: 1px solid var(--pd-line);
+  background: transparent;
+  color: var(--pd-fg);
+  padding: 11px 0;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pd-seg button:last-child {
+  border-right: 0;
+}
+
+.pd-seg button.is-active {
+  background: var(--pd-fg);
+  color: var(--pd-bg);
+}
+
+.pd-list {
+  border-top: 1px solid var(--pd-line);
+  margin-top: 24px;
+}
+
+.pd-listrow {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-bottom: 1px solid var(--pd-line);
+  font-size: 13px;
+}
+
+.pd-listrow > span:last-child {
+  color: var(--pd-muted);
+  font-size: 12px;
+}
+
+.pd-toggle {
+  width: 44px;
+  height: 26px;
+  border-radius: 999px;
+  position: relative;
+  background: var(--pd-line-2);
+}
+
+.pd-toggle i {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #fff;
+}
+
+.pd-toggle.is-on {
+  background: var(--pd-accent);
+}
+
+.pd-toggle.is-on i {
+  left: 21px;
+}
+
 .pd-spacer {
   flex: 1 1 auto;
   min-height: 20px;
@@ -45,7 +161,7 @@
   font-family: var(--pd-font-display);
   font-weight: 800;
   color: var(--pd-fg);
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   line-height: 0.94;
 }
 

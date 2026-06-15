@@ -47,7 +47,7 @@
   font-family: var(--pd-font-display);
   font-size: 42px;
   font-weight: 800;
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
 }
 
 .pd-omerta-card__line {
@@ -111,84 +111,4 @@
   text-decoration: none;
   text-transform: uppercase;
   border-bottom: 2px solid var(--pd-accent);
-}
-
-.pd-settings {
-  margin-top: 34px;
-  padding-top: 24px;
-  border-top: 1px solid var(--pd-line);
-}
-
-.pd-seg {
-  display: flex;
-  border: 1px solid var(--pd-fg);
-  margin-top: 10px;
-}
-
-.pd-seg button {
-  flex: 1;
-  border: 0;
-  border-right: 1px solid var(--pd-line);
-  background: transparent;
-  color: var(--pd-fg);
-  padding: 11px 0;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.pd-seg button:last-child {
-  border-right: 0;
-}
-
-.pd-seg button.is-active {
-  background: var(--pd-fg);
-  color: var(--pd-bg);
-}
-
-.pd-list {
-  border-top: 1px solid var(--pd-line);
-  margin-top: 24px;
-}
-
-.pd-listrow {
-  min-height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  border-bottom: 1px solid var(--pd-line);
-  font-size: 13px;
-}
-
-.pd-listrow > span:last-child {
-  color: var(--pd-muted);
-  font-size: 12px;
-}
-
-.pd-toggle {
-  width: 44px;
-  height: 26px;
-  border-radius: 999px;
-  position: relative;
-  background: var(--pd-line-2);
-}
-
-.pd-toggle i {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 20px;
-  height: 20px;
-  border-radius: 999px;
-  background: #fff;
-}
-
-.pd-toggle.is-on {
-  background: var(--pd-accent);
-}
-
-.pd-toggle.is-on i {
-  left: 21px;
 }

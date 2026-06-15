@@ -45,7 +45,7 @@ export default function DiceRoller({ accent, activeTab, onTabChange, onAccentCha
 
   if (view === "roll") {
     return (
-      <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent} flush>
+      <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent} onAccentChange={onAccentChange} flush>
         <div className="pd-roll-view">
           <DiceScene key={roll.id} roll={roll} isDark={isDark} />
           <div className="pd-roll-view__top">
@@ -72,7 +72,7 @@ export default function DiceRoller({ accent, activeTab, onTabChange, onAccentCha
   }
 
   return (
-    <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent}>
+    <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent} onAccentChange={onAccentChange}>
       <Eyebrow>Dados</Eyebrow>
       <div className="pd-page-head">
         <h1 className="pd-title pd-title--lg">Tu pool</h1>

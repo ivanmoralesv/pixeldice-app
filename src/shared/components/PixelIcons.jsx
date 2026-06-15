@@ -74,6 +74,10 @@ export function IconCheck() {
   return <PixelSvg rects={[[4, 11, 3, 3], [7, 14, 3, 3], [10, 11, 3, 3], [13, 8, 3, 3], [16, 5, 3, 3]]} />;
 }
 
+export function IconMore() {
+  return <PixelSvg rects={[[10, 4, 4, 4], [10, 10, 4, 4], [10, 16, 4, 4]]} />;
+}
+
 export function IconArrowRight() {
   return <PixelSvg rects={[[3, 11, 12, 2], [13, 8, 2, 2], [15, 10, 2, 2], [15, 12, 2, 2], [13, 14, 2, 2]]} />;
 }

@@ -11,7 +11,9 @@ function PixelDiceApp() {
 
   return (
     <div className="pd-app">
-      {activeTab === "selector" && <PlayerSelector accent={accent} activeTab={activeTab} onTabChange={setActiveTab} />}
+      {activeTab === "selector" && (
+        <PlayerSelector accent={accent} activeTab={activeTab} onTabChange={setActiveTab} onAccentChange={setAccent} />
+      )}
       {activeTab === "dice" && (
         <DiceRoller accent={accent} activeTab={activeTab} onTabChange={setActiveTab} onAccentChange={setAccent} />
       )}

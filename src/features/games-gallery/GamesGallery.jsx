@@ -1,47 +1,58 @@
-import { AppShell, Eyebrow } from "../../shared/components/Shell.jsx";
+import { AppShell } from "../../shared/components/Shell.jsx";
+import { FoilCard } from "./FoilCard.jsx";
 import { gamesSeed } from "./gamesSeed.js";
 
 export default function GamesGallery({ accent, activeTab, onTabChange, onAccentChange }) {
-  const featuredGame = gamesSeed.find((game) => game.featured) || gamesSeed[0];
+  const game = gamesSeed.find((item) => item.featured) || gamesSeed[0];
+  const reduced =
+    typeof window !== "undefined" &&
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   return (
-    <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent} onAccentChange={onAccentChange}>
-      <Eyebrow>Juegos · Última novedad</Eyebrow>
-
-      <section className="pd-game-feature">
-        <div className="pd-omerta-card" aria-label="Portada de Omerta">
-          <div className="pd-omerta-card__mark">OM</div>
-          <div className="pd-omerta-card__title">Omertà</div>
-          <div className="pd-omerta-card__line">Callar o traicionar</div>
+    <AppShell
+      activeTab={activeTab}
+      onTabChange={onTabChange}
+      accent={accent}
+      onAccentChange={onAccentChange}
+      tone="omerta"
+    >
+      <section className="pd-omerta-feature" id="juegos">
+        <div className="pd-omerta-feature__cover">
+          <FoilCard
+            width={260}
+            parallax={1}
+            depth={0}
+            motion="drift"
+            foil={0.8}
+            reduced={reduced}
+            href={game.sourceUrl}
+          />
         </div>
 
-        <div className="pd-game-feature__head">
-          <h1 className="pd-title pd-title--xl">{featuredGame.title}</h1>
-          <span className="pd-status-badge">Disponible</span>
-        </div>
-        <p className="pd-sub pd-sub--wide">{featuredGame.summary}</p>
+        <h1 className="pd-omerta-feature__title">{game.name}</h1>
+        <p className="pd-omerta-feature__tagline">{game.tagline}</p>
 
-        <div className="pd-facts">
-          <Fact label="Jugadores" value={`${featuredGame.playersMin} - ${featuredGame.playersMax}`} />
-          <Fact label="Duración" value={`${featuredGame.durationMinutes} min`} />
-          <Fact label="Tipo" value={featuredGame.type} />
-          <Fact label="Estado" value="Disponible" />
+        {game.desc.map((paragraph, index) => (
+          <p key={index} className="pd-omerta-feature__desc">{paragraph}</p>
+        ))}
+
+        <div className="pd-omerta-feature__tech">
+          <div className="pd-omerta-feature__techlabel">{game.techLabel}</div>
+          <div className="pd-omerta-meta">
+            {game.meta.map((row) => (
+              <div key={row.k} className="pd-omerta-meta__row">
+                <span className="pd-omerta-meta__k">{row.k}</span>
+                <span className="pd-omerta-meta__v">{row.v}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <a className="pd-link" href={featuredGame.sourceUrl} target="_blank" rel="noreferrer">
-          Descubre Omertà
+        <a className="pd-omerta-feature__cta" href={game.sourceUrl} target="_blank" rel="noreferrer">
+          {game.cta} <span aria-hidden="true">→</span>
         </a>
       </section>
-
     </AppShell>
-  );
-}
-
-function Fact({ label, value }) {
-  return (
-    <span className="pd-fact">
-      <small>{label}</small>
-      {value}
-    </span>
   );
 }

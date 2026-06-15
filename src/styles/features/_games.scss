@@ -1,114 +1,102 @@
-.pd-game-feature {
-  margin-top: 16px;
+.pd-omerta-feature {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
 }
 
-.pd-omerta-card {
-  width: min(55vw, 210px);
-  aspect-ratio: 0.7;
-  align-self: center;
-  position: relative;
+.pd-omerta-feature__cover {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 24px 20px;
+  justify-content: center;
+  margin: 30px 0 36px;
+}
+
+.pd-omerta-feature__title {
+  margin: 0;
+  font-family: var(--pd-font-display);
+  font-weight: 700;
+  font-size: clamp(54px, 18vw, 84px);
+  letter-spacing: -0.035em;
+  line-height: 0.92;
   color: #f0ebe1;
-  background:
-    radial-gradient(circle at 50% 34%, rgba(212, 188, 134, 0.22), transparent 30%),
-    linear-gradient(145deg, #0c0805, #342a24 46%, #080503);
-  border-radius: 24px;
-  box-shadow:
-    0 24px 50px -24px rgba(0, 0, 0, 0.75),
-    inset 0 0 0 1px rgba(240, 235, 225, 0.14);
-  transform: rotateX(7deg) rotateY(-7deg);
 }
 
-.pd-omerta-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(70% 80% at 24% 18%, rgba(255, 250, 240, 0.16), transparent 62%);
-  pointer-events: none;
+.pd-omerta-feature__tagline {
+  margin: 14px 0 24px;
+  font-family: var(--pd-font-mono);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: rgba(240, 235, 225, 0.6);
 }
 
-.pd-omerta-card__mark {
-  width: 54px;
-  height: 54px;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(240, 235, 225, 0.34);
-  font-family: var(--pd-font-display);
-  font-weight: 800;
-}
-
-.pd-omerta-card__title {
-  font-family: var(--pd-font-display);
-  font-size: 42px;
-  font-weight: 800;
-  letter-spacing: 0;
-}
-
-.pd-omerta-card__line {
+.pd-omerta-feature__desc {
+  margin: 0 0 16px;
+  font-family: var(--pd-font-mono);
+  font-size: 14.5px;
+  line-height: 1.75;
   color: rgba(240, 235, 225, 0.72);
+  text-wrap: pretty;
+}
+
+.pd-omerta-feature__tech {
+  margin-top: 22px;
+}
+
+.pd-omerta-feature__techlabel {
+  margin-bottom: 12px;
+  font-family: var(--pd-font-mono);
   font-size: 11px;
-  line-height: 1.4;
-}
-
-.pd-game-feature__head {
-  margin-top: 24px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.pd-status-badge {
-  border: 1px solid var(--pd-line-2);
-  padding: 6px 9px;
-  margin-bottom: 6px;
-  font-size: 9px;
-  font-weight: 800;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  white-space: nowrap;
+  color: rgba(240, 235, 225, 0.55);
 }
 
-.pd-facts {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0 26px;
-  margin-top: 20px;
-  border-top: 1px solid var(--pd-line);
+.pd-omerta-meta {
+  border-top: 1px solid rgba(240, 235, 225, 0.3);
 }
 
-.pd-fact {
+.pd-omerta-meta__row {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--pd-line);
-  font-size: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(240, 235, 225, 0.2);
 }
 
-.pd-fact small {
-  color: var(--pd-faint);
-  font-size: 9px;
-  font-weight: 700;
+.pd-omerta-meta__k {
+  font-family: var(--pd-font-mono);
+  font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  color: rgba(240, 235, 225, 0.55);
 }
 
-.pd-link {
+.pd-omerta-meta__v {
+  font-family: var(--pd-font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: #f0ebe1;
+  white-space: nowrap;
+}
+
+.pd-omerta-feature__cta {
   align-self: flex-start;
-  margin-top: 22px;
-  padding-bottom: 9px;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
+  margin-top: 32px;
+  padding-bottom: 4px;
+  font-family: var(--pd-font-display);
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.01em;
   text-decoration: none;
-  text-transform: uppercase;
-  border-bottom: 2px solid var(--pd-accent);
+  color: #f0ebe1;
+  border-bottom: 2px solid #f0ebe1;
+}
+
+.pd-omerta-feature__cta span {
+  display: inline-block;
+  transition: transform var(--pd-dur) var(--pd-ease);
+}
+
+.pd-omerta-feature__cta:hover span {
+  transform: translateX(4px);
 }

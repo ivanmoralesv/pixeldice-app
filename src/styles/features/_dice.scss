@@ -122,10 +122,6 @@
     radial-gradient(130% 90% at 50% 35%, color-mix(in srgb, var(--pd-bg) 88%, var(--pd-fg)) 0%, var(--pd-bg-2) 78%);
 }
 
-.pd-dice-scene[data-settled="true"] canvas {
-  opacity: 0;
-}
-
 .pd-dice-scene__fallback {
   position: absolute;
   inset: 0;
@@ -135,55 +131,6 @@
   font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-}
-
-.pd-settled-dice {
-  position: absolute;
-  inset: 126px -10px 250px;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.pd-settled-die {
-  position: absolute;
-  width: 72px;
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  background:
-    linear-gradient(145deg, color-mix(in srgb, var(--die-color) 76%, #ffffff), var(--die-color) 54%, color-mix(in srgb, var(--die-color) 82%, #000000));
-  color: var(--die-ink);
-  font-family: var(--pd-font-display);
-  font-size: 34px;
-  font-weight: 900;
-  line-height: 1;
-  box-shadow:
-    14px 18px 0 -7px color-mix(in srgb, var(--die-color) 70%, #000000),
-    0 24px 34px -24px rgba(0, 0, 0, 0.9),
-    inset 0 0 0 4px rgba(255, 255, 255, 0.12);
-}
-
-.pd-settled-die::after {
-  content: "";
-  position: absolute;
-  inset: 6px;
-  border: 1px solid color-mix(in srgb, var(--die-ink) 22%, transparent);
-  pointer-events: none;
-}
-
-.pd-settled-die--d4,
-.pd-settled-die--d8,
-.pd-settled-die--d20 {
-  clip-path: polygon(50% 0, 100% 28%, 84% 86%, 50% 100%, 16% 86%, 0 28%);
-}
-
-.pd-settled-die--d10,
-.pd-settled-die--d100 {
-  clip-path: polygon(50% 0, 90% 20%, 78% 100%, 22% 100%, 10% 20%);
-}
-
-.pd-settled-die--d12 {
-  clip-path: polygon(50% 0, 92% 18%, 100% 62%, 72% 100%, 28% 100%, 0 62%, 8% 18%);
 }
 
 .pd-roll-view__top {

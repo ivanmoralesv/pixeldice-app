@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "../../app/ThemeProvider.jsx";
 import { playerColors } from "../../features/player-selector/selectorModes.js";
-import { IconDice, IconGames, IconMore, IconSelector } from "./PixelIcons.jsx";
+import { IconClose, IconDice, IconGames, IconMore, IconSelector } from "./PixelIcons.jsx";
 
 const tabs = [
   { id: "selector", label: "Selector", Icon: IconSelector },
@@ -25,13 +25,24 @@ export function AppShell({
   tone = "default",
   showNav = true,
   showSettings = showNav,
+  onClose,
 }) {
   return (
     <div className={`pd-screen pd-screen--${tone}`} style={{ "--pd-accent": accent }}>
       {showSettings && onAccentChange && <SettingsMenu accent={accent} onAccentChange={onAccentChange} />}
+      {onClose && <CloseButton onClose={onClose} />}
       <main className={`pd-body${flush ? " pd-body--flush" : ""}`}>{children}</main>
       {showNav && <GlassBar activeTab={activeTab} onTabChange={onTabChange} />}
     </div>
+  );
+}
+
+export function CloseButton({ onClose, label = "Cerrar" }) {
+  return (
+    <button type="button" className="pd-close-button" onClick={onClose} aria-label={label} title={label}>
+      <span className="pd-close-button__glow" aria-hidden="true" />
+      <span className="pd-close-button__icon"><IconClose /></span>
+    </button>
   );
 }
 

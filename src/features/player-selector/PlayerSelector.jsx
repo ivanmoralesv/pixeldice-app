@@ -107,7 +107,7 @@ export default function PlayerSelector({ accent, activeTab, onTabChange, onAccen
     }
 
     return (
-      <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent} onAccentChange={onAccentChange}>
+      <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent} onAccentChange={onAccentChange} showNav={false} onClose={() => reset("setup")}>
         <Eyebrow>{isDiceFaceMode ? "Selector · Modo dado" : "Selector · Parrilla"}</Eyebrow>
         <h1 className="pd-title pd-title--md">{isDiceFaceMode ? "Mantén pulsado tu cuadrado" : "Elige tu píxel"}</h1>
         <p className="pd-sub">{modeCopy(mode, teamCount, isDiceFaceMode)}</p>
@@ -341,7 +341,7 @@ function StarterTouchSelector({ accent, activeTab, onTabChange, maxPlayers, onBa
   const resolving = Boolean(winner);
 
   return (
-    <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent} flush showNav={false}>
+    <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent} flush showNav={false} onClose={onBack}>
       <section className={`pd-touch-selector${resolving ? " is-resolving" : ""}`}>
         <div
           className="pd-touch-surface"
@@ -374,7 +374,6 @@ function StarterTouchSelector({ accent, activeTab, onTabChange, maxPlayers, onBa
         </div>
 
         <div className="pd-touch-hud" onPointerDown={(event) => event.stopPropagation()}>
-          <button className="pd-touch-back" type="button" onClick={onBack}>Volver</button>
           <div className="pd-touch-meta">
             <span>Jugador inicial</span>
             <strong>{players.length} / {maxPlayers}</strong>
@@ -398,7 +397,7 @@ function ProgressDots({ current, total }) {
 function SelectorResult({ accent, activeTab, onTabChange, onAccentChange, mode, result, onReset, onRepeat }) {
   if (mode === "starter") {
     return (
-      <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={result.winner?.color || accent} tone="winner" flush showNav={false}>
+      <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={result.winner?.color || accent} tone="winner" flush showNav={false} onClose={onReset}>
         <div className="pd-result pd-result--starter">
           <div className="pd-result__winner-lockup">
             <div className="pd-result__emoji pd-result__emoji--winner">{result.winner?.label}</div>
@@ -411,7 +410,7 @@ function SelectorResult({ accent, activeTab, onTabChange, onAccentChange, mode, 
   }
 
   return (
-    <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent} onAccentChange={onAccentChange}>
+    <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent} onAccentChange={onAccentChange} showNav={false} onClose={onReset}>
       <Eyebrow>{mode === "order" ? "Orden final" : "Equipos"}</Eyebrow>
       <h1 className="pd-title pd-title--md">{mode === "order" ? "Turno a turno" : "Mesa equilibrada"}</h1>
       <div className="pd-result-list">

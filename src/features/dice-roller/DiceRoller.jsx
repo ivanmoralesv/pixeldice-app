@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { AppShell, Eyebrow } from "../../shared/components/Shell.jsx";
+import { AppShell } from "../../shared/components/Shell.jsx";
 import { useTheme } from "../../app/ThemeProvider.jsx";
 import { addDieToPool, defaultPool, diceTypes, poolLabel, rollPool, updateDieQuantity } from "./diceEngine.js";
 import { createSavedPool, loadSavedPools, savePoolList } from "./diceStorage.js";
@@ -45,11 +45,10 @@ export default function DiceRoller({ accent, activeTab, onTabChange, onAccentCha
 
   if (view === "roll") {
     return (
-      <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent} onAccentChange={onAccentChange} flush>
+      <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent} onAccentChange={onAccentChange} flush showNav={false} onClose={() => setView("builder")}>
         <div className="pd-roll-view">
           <DiceScene key={roll.id} roll={roll} isDark={isDark} />
           <div className="pd-roll-view__top">
-            <Eyebrow>Dados · Tirada</Eyebrow>
             <div className="pd-chips">
               {breakdown.map((item) => (
                 <span key={item.sides} className="pd-chip">{item.quantity}xd{item.sides} {"->"} {item.total}</span>
@@ -73,7 +72,6 @@ export default function DiceRoller({ accent, activeTab, onTabChange, onAccentCha
 
   return (
     <AppShell activeTab={activeTab} onTabChange={onTabChange} accent={accent} onAccentChange={onAccentChange}>
-      <Eyebrow>Dados</Eyebrow>
       <div className="pd-page-head">
         <h1 className="pd-title pd-title--lg">Tu pool</h1>
         <button type="button" className="pd-text-action" onClick={saveCurrentPool}>Guardar</button>

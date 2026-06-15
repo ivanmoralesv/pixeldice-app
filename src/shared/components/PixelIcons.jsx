@@ -81,3 +81,14 @@ export function IconMore() {
 export function IconArrowRight() {
   return <PixelSvg rects={[[3, 11, 12, 2], [13, 8, 2, 2], [15, 10, 2, 2], [15, 12, 2, 2], [13, 14, 2, 2]]} />;
 }
+
+export function IconClose() {
+  return (
+    <PixelSvg
+      rects={[
+        [5, 5, 3, 3], [8, 8, 3, 3], [11, 11, 3, 3], [14, 14, 3, 3], [17, 17, 3, 3],
+        [17, 5, 3, 3], [14, 8, 3, 3], [8, 14, 3, 3], [5, 17, 3, 3],
+      ]}
+    />
+  );
+}

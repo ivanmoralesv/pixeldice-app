@@ -1,7 +1,7 @@
 export const diceTypes = [4, 6, 8, 10, 12, 20, 100];
 
 export const defaultPool = [
-  { id: "d20_base", sides: 20, quantity: 2, color: "#050505", labelMode: "numbers" },
+  { id: "d20_base", sides: 20, quantity: 2, color: "#3A3B40", labelMode: "numbers" },
   { id: "d6_accent", sides: 6, quantity: 4, color: "#E8FF00", labelMode: "numbers" },
 ];
 
@@ -35,7 +35,7 @@ export function updateDieQuantity(pool, sides, delta) {
   return next.filter((die) => die.quantity > 0);
 }
 
-export function addDieToPool(pool, sides, color = "#050505") {
+export function addDieToPool(pool, sides, color = "#3A3B40") {
   const existing = pool.find((die) => die.sides === sides && die.color === color);
   if (existing) return updateDieQuantity(pool, sides, 1);
   return [...pool, { id: `d${sides}_${Date.now()}`, sides, quantity: 1, color, labelMode: "numbers" }];

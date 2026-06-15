@@ -5,7 +5,7 @@ import { addDieToPool, defaultPool, diceTypes, poolLabel, rollPool, updateDieQua
 import { createSavedPool, loadSavedPools, savePoolList } from "./diceStorage.js";
 import DiceScene from "./DiceScene.jsx";
 
-const swatches = ["#050505", "#E8FF00", "#4DFF1A", "#00E5FF", "#FF2E9A", "#B026FF", "#FF7A00"];
+const swatches = ["#3A3B40", "#C7CAD1", "#E8FF00", "#4DFF1A", "#00E5FF", "#FF2E9A", "#B026FF", "#FF7A00"];
 
 export default function DiceRoller({ accent, activeTab, onTabChange, onAccentChange }) {
   const { isDark } = useTheme();
@@ -86,8 +86,8 @@ export default function DiceRoller({ accent, activeTab, onTabChange, onAccentCha
             <span className="pd-poolrow__meta">
               <strong>d{die.sides}</strong>
               <small>
-                {die.color !== "#050505" && <i className="pd-swatch" style={{ background: die.color, borderColor: die.color }} />}
-                {die.color === "#050505" ? "Estándar · números" : "Variante · color propio"}
+                {die.color !== "#3A3B40" && <i className="pd-swatch" style={{ background: die.color, borderColor: die.color }} />}
+                {die.color === "#3A3B40" ? "Estándar · números" : "Variante · color propio"}
               </small>
             </span>
             <span className="pd-qty">
@@ -119,7 +119,7 @@ export default function DiceRoller({ accent, activeTab, onTabChange, onAccentCha
               style={{ background: color }}
               onClick={() => {
                 setSelectedColor(color);
-                if (color !== "#050505") onAccentChange(color);
+                if (color !== "#3A3B40") onAccentChange(color);
               }}
               aria-label={`Usar color ${color}`}
             />

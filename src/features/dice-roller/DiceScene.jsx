@@ -76,7 +76,7 @@ function DiceField({ dice, restRef, active }) {
 function TumblingDie({ die, spawn, restRef }) {
   const bodyRef = useRef(null);
   const geometry = useMemo(() => getGeometry(die.sides), [die.sides]);
-  const color = die.color || "#050505";
+  const color = die.color || "#3A3B40";
 
   useEffect(() => {
     const body = bodyRef.current;
@@ -118,7 +118,7 @@ function SettledDie({ die, rest }) {
   const spriteRef = useRef(null);
   const geometry = useMemo(() => getGeometry(die.sides), [die.sides]);
   const faces = useMemo(() => getFaceSpec(die.sides), [die.sides]);
-  const color = die.color || "#050505";
+  const color = die.color || "#3A3B40";
   const labelTexture = useMemo(() => getLabelTexture(die.value, color), [die.value, color]);
 
   const startPos = rest?.pos ?? [0, FLOOR_Y + 0.5, 0];

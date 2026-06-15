@@ -1,0 +1,244 @@
+.pd-pool {
+  margin-top: 18px;
+}
+
+.pd-poolrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--pd-line);
+}
+
+.pd-die-mini {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  background: var(--die-color, #050505);
+  color: color-mix(in srgb, var(--die-color, #050505) 15%, #ffffff);
+  font-family: var(--pd-font-display);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.pd-poolrow__meta {
+  flex: 1;
+  display: grid;
+  gap: 3px;
+}
+
+.pd-poolrow__meta strong {
+  font-family: var(--pd-font-display);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.pd-poolrow__meta small {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--pd-muted);
+  font-size: 11px;
+}
+
+.pd-swatch {
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--pd-line-2);
+}
+
+.pd-qty {
+  height: 36px;
+  display: grid;
+  grid-template-columns: 34px 30px 34px;
+  border: 1px solid var(--pd-line-2);
+}
+
+.pd-qty button {
+  border: 0;
+  background: transparent;
+  color: var(--pd-fg);
+}
+
+.pd-qty span {
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.pd-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.pd-swatch-lg {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--pd-line);
+}
+
+.pd-swatch-lg.is-active {
+  box-shadow: 0 0 0 2px var(--pd-bg), 0 0 0 4px var(--pd-fg);
+}
+
+.pd-saved {
+  margin-top: 24px;
+}
+
+.pd-saved-row {
+  width: 100%;
+  min-height: 48px;
+  border: 0;
+  border-bottom: 1px solid var(--pd-line);
+  background: transparent;
+  color: var(--pd-fg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.pd-saved-row small {
+  color: var(--pd-muted);
+  font-size: 11px;
+}
+
+.pd-roll-view {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.pd-dice-scene {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(130% 90% at 50% 35%, color-mix(in srgb, var(--pd-bg) 88%, var(--pd-fg)) 0%, var(--pd-bg-2) 78%);
+}
+
+.pd-dice-scene[data-settled="true"] canvas {
+  opacity: 0;
+}
+
+.pd-dice-scene__fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--pd-muted);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pd-settled-dice {
+  position: absolute;
+  inset: 126px -10px 250px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.pd-settled-die {
+  position: absolute;
+  width: 72px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--die-color) 76%, #ffffff), var(--die-color) 54%, color-mix(in srgb, var(--die-color) 82%, #000000));
+  color: var(--die-ink);
+  font-family: var(--pd-font-display);
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1;
+  box-shadow:
+    14px 18px 0 -7px color-mix(in srgb, var(--die-color) 70%, #000000),
+    0 24px 34px -24px rgba(0, 0, 0, 0.9),
+    inset 0 0 0 4px rgba(255, 255, 255, 0.12);
+}
+
+.pd-settled-die::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid color-mix(in srgb, var(--die-ink) 22%, transparent);
+  pointer-events: none;
+}
+
+.pd-settled-die--d4,
+.pd-settled-die--d8,
+.pd-settled-die--d20 {
+  clip-path: polygon(50% 0, 100% 28%, 84% 86%, 50% 100%, 16% 86%, 0 28%);
+}
+
+.pd-settled-die--d10,
+.pd-settled-die--d100 {
+  clip-path: polygon(50% 0, 90% 20%, 78% 100%, 22% 100%, 10% 20%);
+}
+
+.pd-settled-die--d12 {
+  clip-path: polygon(50% 0, 92% 18%, 100% 62%, 72% 100%, 28% 100%, 0 62%, 8% 18%);
+}
+
+.pd-roll-view__top {
+  position: relative;
+  z-index: 3;
+  padding: calc(56px + env(safe-area-inset-top, 0px)) 22px 0;
+}
+
+.pd-roll-view__top .pd-chips {
+  margin-top: 14px;
+}
+
+.pd-roll-view__bottom {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: calc(104px + env(safe-area-inset-bottom, 0px));
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.pd-mark {
+  display: inline-block;
+  background: var(--pd-accent);
+  color: var(--pd-on-accent);
+  padding: 3px 9px;
+}
+
+.pd-roll-total {
+  font-family: var(--pd-font-display);
+  font-size: clamp(64px, 20vw, 86px);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+
+.pd-roll-actions {
+  display: grid;
+  gap: 8px;
+}
+
+.pd-pill-button {
+  border: 1px solid var(--pd-glass-hair);
+  border-radius: 28px;
+  background: var(--pd-glass);
+  color: var(--pd-fg);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  padding: 13px 18px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}

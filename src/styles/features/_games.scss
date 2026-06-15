@@ -1,0 +1,194 @@
+.pd-game-feature {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pd-omerta-card {
+  width: min(55vw, 210px);
+  aspect-ratio: 0.7;
+  align-self: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 20px;
+  color: #f0ebe1;
+  background:
+    radial-gradient(circle at 50% 34%, rgba(212, 188, 134, 0.22), transparent 30%),
+    linear-gradient(145deg, #0c0805, #342a24 46%, #080503);
+  border-radius: 24px;
+  box-shadow:
+    0 24px 50px -24px rgba(0, 0, 0, 0.75),
+    inset 0 0 0 1px rgba(240, 235, 225, 0.14);
+  transform: rotateX(7deg) rotateY(-7deg);
+}
+
+.pd-omerta-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(70% 80% at 24% 18%, rgba(255, 250, 240, 0.16), transparent 62%);
+  pointer-events: none;
+}
+
+.pd-omerta-card__mark {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(240, 235, 225, 0.34);
+  font-family: var(--pd-font-display);
+  font-weight: 800;
+}
+
+.pd-omerta-card__title {
+  font-family: var(--pd-font-display);
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+.pd-omerta-card__line {
+  color: rgba(240, 235, 225, 0.72);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.pd-game-feature__head {
+  margin-top: 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.pd-status-badge {
+  border: 1px solid var(--pd-line-2);
+  padding: 6px 9px;
+  margin-bottom: 6px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.pd-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 26px;
+  margin-top: 20px;
+  border-top: 1px solid var(--pd-line);
+}
+
+.pd-fact {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--pd-line);
+  font-size: 12px;
+}
+
+.pd-fact small {
+  color: var(--pd-faint);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.pd-link {
+  align-self: flex-start;
+  margin-top: 22px;
+  padding-bottom: 9px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--pd-accent);
+}
+
+.pd-settings {
+  margin-top: 34px;
+  padding-top: 24px;
+  border-top: 1px solid var(--pd-line);
+}
+
+.pd-seg {
+  display: flex;
+  border: 1px solid var(--pd-fg);
+  margin-top: 10px;
+}
+
+.pd-seg button {
+  flex: 1;
+  border: 0;
+  border-right: 1px solid var(--pd-line);
+  background: transparent;
+  color: var(--pd-fg);
+  padding: 11px 0;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pd-seg button:last-child {
+  border-right: 0;
+}
+
+.pd-seg button.is-active {
+  background: var(--pd-fg);
+  color: var(--pd-bg);
+}
+
+.pd-list {
+  border-top: 1px solid var(--pd-line);
+  margin-top: 24px;
+}
+
+.pd-listrow {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-bottom: 1px solid var(--pd-line);
+  font-size: 13px;
+}
+
+.pd-listrow > span:last-child {
+  color: var(--pd-muted);
+  font-size: 12px;
+}
+
+.pd-toggle {
+  width: 44px;
+  height: 26px;
+  border-radius: 999px;
+  position: relative;
+  background: var(--pd-line-2);
+}
+
+.pd-toggle i {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #fff;
+}
+
+.pd-toggle.is-on {
+  background: var(--pd-accent);
+}
+
+.pd-toggle.is-on i {
+  left: 21px;
+}
